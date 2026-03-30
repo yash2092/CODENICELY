@@ -1,0 +1,49 @@
+API Documentation
+Base URL: http://localhost:3000
+
+Auth APIs — 
+Auth APIs
+
+Auth APIs — Auth APIs
+1. 
+Login
+Method: POST
+Endpoint: /auth/login
+Description: Authenticates a user and returns an access token.
+
+2. 
+Logout
+Method: POST
+Endpoint: /auth/logout
+Description: Logs out the currently authenticated user and invalidates the session.
+
+3. 
+Refresh
+Method: GET
+Endpoint: /auth/refresh
+Description: Refreshes the authentication token for an active session.
+
+Resource APIs — Resource APIs
+
+1.
+Get order
+Method: GET
+Endpoint: /orders
+Description: Retrieves a list of all orders.
+
+2. 
+Post order
+Method: POST
+Endpoint: /orders
+Description: Creates a new order.
+Request Body (JSON):
+{    "item": "RAM",    "quantity": 3}
+Response (201 Created):
+{    "message": "Order created         successfully",    "data": {        "id":             "d73a839a-8972-4252-907e-d8c            44ad0b6e3",        "item": "RAM",        "quantity": 3,        "status": "pending",        "createdBy":             "yash_admin@example.com"    }}
+
+3. 
+Delete order
+Method: DELETE
+Endpoint: /orders/{id}
+Description: Deletes an order by its unique ID.
+Path Variable: id — The UUID of the order to delete (e.g., d73a839a-8972-4252-907e-d8c44ad0b6e3)
