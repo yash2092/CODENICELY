@@ -1,0 +1,4 @@
+node_modules/
+auth-service/node_modules
+resource-service/node_modules
+.env
