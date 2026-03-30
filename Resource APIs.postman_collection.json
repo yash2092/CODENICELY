@@ -1,0 +1,101 @@
+{
+  "info": {
+    "_postman_id": "aea3d29e-adb7-42af-9d09-6ac55d2c42cd",
+    "name": "Resource APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38118015"
+  },
+  "item": [
+    {
+      "name": "Get order",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Post order",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWM3ZGQ0NGYzMzg5MDRiMTNmZTllOTMiLCJlbWFpbCI6Inlhc2hfYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJhZG1pbiJdLCJwZXJtaXNzaW9ucyI6WyJPcmRlcjpyZWFkIiwiT3JkZXI6d3JpdGUiLCJPcmRlcjpkZWxldGUiXSwiaWF0IjoxNzc0ODY1OTg3LCJleHAiOjE3NzQ4NjY4ODd9.MHF7zTflMjq4ooHQh84xqoiHKQn7LY5TIdqXpDePegk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"item\": \"RAM\",\r\n    \"quantity\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3000/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete order",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2OWM3ZGQ0NGYzMzg5MDRiMTNmZTllOTMiLCJlbWFpbCI6Inlhc2hfYWRtaW5AZXhhbXBsZS5jb20iLCJyb2xlcyI6WyJhZG1pbiJdLCJwZXJtaXNzaW9ucyI6WyJPcmRlcjpyZWFkIiwiT3JkZXI6d3JpdGUiLCJPcmRlcjpkZWxldGUiXSwiaWF0IjoxNzc0ODY1OTg3LCJleHAiOjE3NzQ4NjY4ODd9.MHF7zTflMjq4ooHQh84xqoiHKQn7LY5TIdqXpDePegk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"item\": \"RAM\",\r\n    \"quatity\": 3\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/orders/d73a839a-8972-4252-907e-d8c44ad0b6e3",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "orders",
+            "d73a839a-8972-4252-907e-d8c44ad0b6e3"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
