@@ -1,0 +1,55 @@
+# Role-Based Access Control (RBAC) API
+
+This project provides a secure backend for managing user authentication and protecting restricted resources (such as orders). It is built with Node.js and operates as a single unified application, while retaining a clean separation between the authentication logic and the resource management logic.
+
+## Architecture explanation
+
+The application is structured around a central entry point (`index.js`) that routes traffic to two distinct services:
+- **Auth Service (`/auth`):** Manages user identity. It handles user logins, issues secure access tokens, and securely connects to the MongoDB database to retrieve user roles and permissions.
+- **Resource Service (`/orders`):** Manages protected data. It does not connect directly to the database. Instead, it relies on the tokens provided by the Auth Service to verify a user's identity and determine if they are authorized to access or modify data.
+
+By running both services together on a single port (defaulting to Port 3000), the application remains easy to deploy and manage while keeping its internal logic modular.
+
+## Auth & RBAC flow
+
+1. **Authentication:** A user submits their email and password to the `/auth/login` endpoint. Upon successful verification, the system returns a short-lived "Access Token" and a longer-lasting "Refresh Token".
+2. **Requesting Access:** When the user attempts to view or create an order via the `/orders` endpoint, they must include their Access Token in the request headers.
+3. **Token Verification:** The Resource Service intercepts the request and cryptographically verifies the token using a shared secret key (`JWT_SECRET`) to ensure it is authentic and unmodified.
+4. **Permission Authorization:** Before granting access to the data, the Resource Service internally queries the Auth Service to check if the specific user holds the necessary permissions (e.g., the ability to read or write orders). If the permission is confirmed, the request succeeds; otherwise, it is safely denied.
+
+## Setup instructions
+
+The project is consolidated into a single folder for straightforward installation:
+
+1. Clone the repository and navigate to the project folder in your terminal.
+2. Run `npm install` to download all required dependencies into a single `node_modules` directory.
+3. Create a file named `.env` in the root directory. Paste the environment variables provided in the section below.
+4. **Provisioning Users:** For security, the endpoints to dynamically create users and assign permissions via the API have been removed. You must seed your initial administrative users and their permissions directly within your MongoDB database.
+5. Provide your MongoDB connection string in the `.env` file.
+6. Run `npm start` (or `npm run dev` for automatic restarts during development) to launch the unified API.
+
+## Environment variables
+
+Create a `.env` file in the project's root directory with the following configuration:
+
+
+## Security decisions
+
+The system was designed with several key security practices:
+- **Stateless Authorization:** The Resource Service validates permissions using secure internal requests and cryptographic tokens rather than establishing redundant database connections.
+- **Restricted Provisioning:** Removing the API routes that create users and roles prevents malicious actors from exploiting the system to grant themselves administrative access.
+- **Unified Network Surface:** Routing all traffic through a single entry point reduces the number of exposed network ports, minimizing the external attack surface.
+- **Secure Password Hashing:** All user passwords stored in the database are securely hashed and salted using the `bcryptjs` library to protect sensitive credentials.
+
+## Pre-Configured Test Accounts
+
+The following accounts are pre-provisioned in the database for validating the Role-Based Access Control (RBAC) flows. 
+
+**Default Password for all accounts:** `password123`
+
+| Email Address | Role | Access Permissions |
+| :--- | :--- | :--- |
+| `yash_admin@example.com` | Admin | Read, Write, Delete Orders |
+| `yash_manager@example.com` | Manager | Read, Write Orders |
+| `yash_user@example.com` | Contributor | Read Orders |
+
